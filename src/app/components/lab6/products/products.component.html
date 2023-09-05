@@ -1,0 +1,27 @@
+<div class="mx-5">
+  <h2>Products</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th *ngFor="let head of tableHeader">{{ head }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of getAllProducts(); index as i">
+        <td class="font-weight-bold">{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.qty }}</td>
+        <td>{{ product.price }}</td>
+        <td>
+          <a
+            class="btn btn-outline-primary"
+            role="button"
+            (click)="addToCart(i)"
+          >
+            Add
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

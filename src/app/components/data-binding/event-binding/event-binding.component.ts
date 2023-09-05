@@ -1,0 +1,20 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-event-binding',
+  templateUrl: './event-binding.component.html',
+  styleUrls: ['./event-binding.component.css'],
+})
+export class EventBindingComponent implements OnInit {
+  constructor() {}
+
+  ngOnInit(): void {}
+
+  OnUserClick(e?: any) {
+    alert(`You ${e.type} the button at (${e.clientX},${e.clientY})`);
+  }
+
+  OnUserDBclick(e?: any) {
+    alert(`You ${e.type} the button`);
+  }
+}

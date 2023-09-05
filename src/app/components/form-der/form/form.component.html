@@ -1,0 +1,130 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">Signup</div>
+    <div class="card-body" style="margin-left: 10px">
+      <div class="row">
+        <div class="col-md-7">
+          <form [formGroup]="profileForm">
+            <div class="form-group">
+              <label for="">Title</label>
+              <select class="form-control" formControlName="title">
+                <option *ngFor="let option of options" [value]="option">
+                  {{ option }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Student ID</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="studentId"
+              />
+              <div
+                *ngIf="
+                  studentId?.invalid && (studentId?.dirty || studentId?.touched)
+                "
+                class="alert alert-danger"
+              >
+                <div *ngIf="studentId?.errors?.['required']">
+                  Student ID is required
+                </div>
+                <div *ngIf="studentId?.errors?.['pattern']">
+                  Your Student ID is incorrect!!
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" class="form-control" formControlName="name" />
+            </div>
+
+            <div class="form-check form-check-inline" *ngFor="let s of sex">
+              <label class="form-check-label">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="sex"
+                  [value]="s"
+                  formControlName="sex"
+                />{{ s }}
+              </label>
+            </div>
+
+            <br /><br />
+            <div class="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                class="form-control"
+                formControlName="email"
+              />
+              <div
+                *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+                class="alert alert-danger"
+              >
+                <div *ngIf="email?.errors?.['required']">Email is required</div>
+                <div *ngIf="email?.errors?.['email']">
+                  Your email is incorrect!!
+                </div>
+              </div>
+            </div>
+
+            <!-- Address -->
+            <div formGroupName="address">
+              <h4>Address</h4>
+              <div class="form-group">
+                <label>Street</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="street"
+                />
+              </div>
+              <div class="form-group">
+                <label>Zip</label>
+                <input type="text" class="form-control" formControlName="zip" />
+              </div>
+            </div>
+            <!-- Aliases -->
+            <div formArrayName="aliases">
+              <h4>Aliases</h4>
+              <button class="btn btn-success mb-2" (click)="addAlias()">
+                Add Alias
+              </button>
+              <div
+                class="form-group"
+                *ngFor="let alias of aliases.controls; let i = index"
+              >
+                <label>Alias: {{ i }}</label>
+                <div class="d-flex">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [formControlName]="i"
+                  />
+                  <!-- delete alias -->
+                  <button
+                    class="btn btn-danger ml-2"
+                    (click)="removeAlias(i)"
+                    [disabled]="getLengthAliases() <= 1"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+            <br />
+            <!-- button -->
+            <button type="submit" class="btn btn-primary">Submit</button>&nbsp;
+            <button type="reset" class="btn btn-danger">Reset</button>
+          </form>
+        </div>
+
+        <div class="col-md-5">
+          <app-form-display [profileForm]="profileForm"></app-form-display>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

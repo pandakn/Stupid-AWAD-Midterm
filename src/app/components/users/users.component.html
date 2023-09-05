@@ -1,0 +1,28 @@
+<div class="mx-5">
+  <h2>Users</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th *ngFor="let k of tableHeader">{{ k }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of getAllUsers()">
+        <td class="font-weight-bold">{{ user.studentId }}</td>
+        <td>{{ user.title }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.sex }}</td>
+        <td>{{ user.email }}</td>
+        <td class="d-flex flex-column">
+          <p>
+            Street: <b>{{ user.address.street }}</b>
+          </p>
+          <p>
+            Zip: <b>{{ user.address.zip }}</b>
+          </p>
+        </td>
+        <td>{{ user.aliases }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,10 @@
+<!-- send props to child component -->
+<app-card
+  [id]="id"
+  [bio]="bio"
+  [name]="name"
+  [age]="age"
+  [imgUrl]="imgUrl"
+></app-card>
+<br />
+<app-bio-input (bioEvent)="receiveBioFromChild($event)"></app-bio-input>
