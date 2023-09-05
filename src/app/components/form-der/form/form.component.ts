@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { IUser } from 'src/app/services/users/users.model';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-form',
@@ -7,6 +9,8 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./form.component.css'],
 })
 export class FormComponent {
+  constructor(private userService: UsersService) {}
+
   options: string[] = ['', 'Mr', 'Mrs', 'Miss', 'Ms'];
   sex: string[] = ['Male', 'Female'];
 
@@ -14,7 +18,7 @@ export class FormComponent {
     title: new FormControl(''),
     studentId: new FormControl('', [
       Validators.required,
-      Validators.pattern('B|b[0-9]{7}'),
+      Validators.pattern('[Bb][0-9]{7}'),
     ]),
     name: new FormControl(''),
     sex: new FormControl(''),
@@ -46,8 +50,6 @@ export class FormComponent {
     control.removeAt(idx);
   }
 
-  constructor() {}
-
   ngOnInit(): void {}
 
   addAlias() {
@@ -57,5 +59,11 @@ export class FormComponent {
   getLengthAliases(): number {
     const aliasesLength = this.aliasesFormArray;
     return aliasesLength.length;
+  }
+
+  submitForm(formGroup: FormGroup) {
+    const data = formGroup.value;
+    this.userService.addUser(data);
+    this.profileForm.reset();
   }
 }
